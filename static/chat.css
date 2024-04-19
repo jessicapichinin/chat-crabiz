@@ -1,0 +1,89 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #3f3939; /* cor de fundo inspirada em Kuromi */
+}
+
+.chat-container {
+    max-width: 900px;
+    height: 550px;
+    margin: 20px auto;
+    border-radius: 8px;
+    overflow: hidden;
+}
+
+.chat-header {
+    background-color:#f9adc7; /* cor de fundo do cabeçalho inspirada em Kuromi */
+    color: black;
+    padding: 10px;
+    text-align: center;
+}
+
+.mensagens {
+    padding-left: 10px;
+    color: #f0f0f0;
+}
+
+.message {
+    background-color: #dab6f0; /* cor de fundo das mensagens inspirada em Kuromi */
+    padding: 8px 12px;
+    margin: 5px 0;
+    border-radius: 8px;
+}
+
+.message.sent {
+    background-color: #ed7aa8; /* cor de fundo das mensagens enviadas inspirada em Kuromi */
+    color: #fff;
+    align-self: flex-end;
+}
+
+.message-input {
+    display: flex;
+    margin-left: 5px;
+    position: fixed;
+    bottom: 65px;
+    width: 895px;
+}
+
+.message-input input[type="text"] {
+    flex: 1;
+    padding: 8px;
+    border: 1px solid #ed7aa8; /* cor da borda do campo de entrada inspirada em Kuromi */
+    border-radius: 5px;
+    margin-right: 5px;
+}
+
+.message-input button {
+    padding: 8px 15px;
+    background-color: #ed7aa8; /* cor de fundo do botão de envio inspirada em Kuromi */
+    color: black;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-right: 5px;
+    width: 100px;
+}
+
+select#usuario {
+    padding-left: 10px;
+    font-size: 16px;
+    margin-right: 5px;
+    border: 1px solid #ed7aa8;
+    border-radius: 5px;
+    background-color: #eeeeee;
+    width: 150px;
+}
+
+/* Estilo para as opções do select */
+select#usuario option {
+    padding: 10px;
+    font-size: 14px;
+    border-bottom: 1px solid #ccc;
+    background-color: #dcdcdc;
+}
+
+/* Estilo para a opção selecionada */
+select#usuario option:checked {
+    background-color: #f0f0f0;
+}

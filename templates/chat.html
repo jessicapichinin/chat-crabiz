@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chat Crabiz </title>
+    <link rel="stylesheet" href="../static/chat.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+</head>
+
+<body>
+<div class="chat-container">
+    <div class="chat-header">
+        🎀 Chat Crabiz 💀
+    </div>
+
+    <div class="mensagens" id="chat-container">
+        <!-- Messages will be added here -->
+        <p> oi amorecos </p>
+    </div>
+
+    <div class="message-input">
+        <select name="usuario" id="usuario" onChange="mostraMensagens()">
+            <option value="telefone">Nome</option>
+        </select>
+        <input type="text" id="message-input" placeholder="Escreva sua mensagem aqui...">
+        <button onclick="enviaMensagens()">Enviar</button>
+    </div>
+
+    <script type="text/javascript">
+        function mostraUsuarios(){
+            // requisição via ajax
+            $.ajax({
+                url:"/get/usuarios",
+                type:"GET",
+                success: function(contatos){
+                    for(let i=0; i<contatos.length; i++){
+                        let tag = '<option value="'+contatos[i]['telefone']+'">'+contatos[i]['nome']+'</option>'
+                        $("#usuario").append(tag)
+                    }
+                }
+            })
+        }
+
+        $(document).ready(mostraUsuarios())
+
+    </script>
+
+    <script type="text/javascript">
+        function mostraMensagens(){
+            // requisição via ajax
+            $.ajax({
+                url:"/get/mensagens/" + $("#usuario").val(),
+                type:"GET",
+                success: function(mensagens){
+                    // limpa a div que armazena as mensagens
+                    $("#chat-container").empty()
+                    for(let i=0; i<mensagens.length; i++){
+                        tag = "<p>"+mensagens[i]['mensagem']+"</p>"
+                        $("#chat-container").append(tag)
+                    }
+                }
+            })
+        }
+
+        setInterval(mostraMensagens, 5000);
+
+    </script>
+
+    <script type="text/javascript">
+        function enviaMensagens(){
+            var mensagem = {
+                conteudo: $('#message-input').val(),
+                destinatario: $('#usuario').val()
+            }
+
+            $.ajax({
+                url: '/post/envio', 
+                type: 'POST',
+                data: JSON.stringify(mensagem),
+                contentType: 'application/json',
+                success: function() {
+                    alert("Mensagem enviada com sucesso! 🎀");
+                    mostraMensagens();
+                },
+                error: function(){
+                    alert("Erro ao enviar mensagem! 💀 Detalhes do erro: " + error);
+                }
+            });
+
+        }
+    </script>
+
+</div>
+</body>
+</html>

@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    <title>Cadastro</title>
+    <link rel="stylesheet" href="../static/cadastro.css">
+</head>
+
+<body>
+<div class="container">
+    <img src="../static/kuromi1.png" alt="Kuromi">
+    <h3 id="resultado"></h3>
+    <h1> 🎀 Cadastro 💀 </h1>
+        <input type="text" name="nome" id="nome" placeholder="Nome" required>
+        <input type="number" name="tel" id="tel" placeholder="Telefone" required>
+        <input type="password" name="senha" id="senha" placeholder="Senha" required>
+        <button type="submit" id="bt_cadastrar" onclick="enviar_cadastro()">Cadastrar</button>
+        <a href="/login"><button> Já tem uma conta? Faça login clicando aqui! </button></a>
+</div>
+</body>
+
+<script type="text/javascript">
+    function enviar_cadastro(){
+        // coletando os dados do formulario
+        let dados_cadastro = {
+            nome: $('#nome').val(),
+            tel: $('#tel').val(),
+            senha: $('#senha').val()
+        };
+
+        $.ajax({
+            url: '/',
+            type: 'POST',
+            data: JSON.stringify(dados_cadastro),
+            contentType: 'application/json',
+            success: function(){
+                $('resultado').append("Cadastro efetuado com sucesso! 🎀");
+            },
+            error: function(){
+                $('resultado').append("Erro ao cadastrar! 💀");
+            }
+        })
+    }
+</script>
+
+</html>
